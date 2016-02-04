@@ -1,17 +1,16 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>MAGFest - Schedule</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-table.css">
     <link rel="stylesheet" href="assets/css/bootstrap-table-sticky-header.css">
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/css/schedstyle.css">
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="assets/js/bootstrap-table.js"></script>
-    <script src="assets/js/bootstrap-table-flat-json.js"></script>
-    <script src="assets/js/bootstrap-table-sticky-header.js"></script>
+    <script src="assets/js/bootstrap-table-sticky-header.min.js"></script>
     
 </head>
 
@@ -21,19 +20,33 @@
         <table id="table"
                data-toggle="table"
                data-classes="table table-hover"
-               data-flat="true"
+               data-height="100vh"
                data-search="true"
                data-striped="true"
+               data-sort-name="start"
                data-show-columns="true"
-               data-url="http://prime.uber.magfest.org/uber/schedule/panels_json">
+               data-detail-view="true"
+               data-detail-formatter="detailFormatter"
+               data-url="panels.json">
             <thead>
             <tr>
-                <th data-field="start" data-switchable="false" data-sortable="false">Time</th>
-                <th data-field="location" data-sortable="false">Location</th>
+
+                <th data-field="start" data-switchable="false" data-sortable="false">Start</th>
                 <th data-field="name" data-sortable="false">Name</th>
+                <th data-field="location" data-sortable="false">Location</th>
+
             </tr>
             </thead>
         </table>
     </div>
+    <script>
+        function detailFormatter(index, row) {
+            var html = [];
+            $.each(row, function (key, value) {
+                html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+            });
+            return html.join('');
+        }
+    </script>
 </body>
 </html>
